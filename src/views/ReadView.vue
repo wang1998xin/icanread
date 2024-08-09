@@ -1,10 +1,13 @@
 <script setup lang="ts">
-import WelcomeItem from './WelcomeItem.vue'
-import DocumentationIcon from './icons/IconDocumentation.vue'
-import ToolingIcon from './icons/IconTooling.vue'
-import EcosystemIcon from './icons/IconEcosystem.vue'
-import CommunityIcon from './icons/IconCommunity.vue'
-import SupportIcon from './icons/IconSupport.vue'
+import { useCssVar } from '@vueuse/core'
+
+const color1 = useCssVar("--vt-c-white");
+// 修改body背景色
+color1.value = '#e3d1bd';
+
+const color2 = useCssVar("--vt-c-indigo");
+// 修改段落文字颜色
+color2.value = '##333';
 </script>
 
 <template>
@@ -93,18 +96,20 @@ import SupportIcon from './icons/IconSupport.vue'
       <p>柳无邪对这个岳父，心存畏惧，还有一丝尊敬，这些年没有徐家，他不知死了多少次。</p>
       <p>新书新的起航，让大家久等了，雕琢了两个月，一定不会让大家失望，先看几十章再说，不好看来打我。</p>
     </div>
+
+    <!-- 页面中的固定位置 开始-->
+    <div class="fix">
+      <!--文章头部  开始-->
+      <div class="header">
+        <span class="headLeft">
+          <i>《<a href="https://www.ireader.com.cn/index.php?ca=bookdetail.index&amp;pca=Chapter.Index&amp;bid=12286678">太荒吞天诀</a>》</i>
+          <em> - 第一章青楼</em>
+        </span>
+      </div>
+      <!-- 文章头部 结束-->
+    </div>
   </div>
   <!-- 文章 结束-->
-  <!-- <WelcomeItem>
-    <template #icon>
-      <DocumentationIcon />
-    </template>
-<template #heading>Documentation</template>
-
-Vue’s
-<a href="https://vuejs.org/" target="_blank" rel="noopener">official documentation</a>
-provides you with all information you need to get started.
-</WelcomeItem> -->
 
 </template>
 
@@ -137,5 +142,24 @@ provides you with all information you need to get started.
   text-indent: 2em;
   padding-bottom: 1rem;
   line-height: 2.1875rem;
+}
+
+.fix {
+  width: 46.875rem;
+  position: fixed;
+  left: 50%;
+  top: 0;
+  margin-left: -23.4375rem;
+}
+
+.header {
+    width: 40.625rem;
+    height: 4.0625rem;
+    border-bottom: 1px solid #c7c7c7;
+    background: #f8f0e7;
+    position: absolute;
+    left: 50px;
+    top: 0;
+    overflow: hidden;
 }
 </style>

@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router';
+
 defineProps<{
   msg: string
 }>()
@@ -20,10 +22,11 @@ defineProps<{
     <div class="show">
       <div class="showLeft">
         <h3>
-          <a href="https://www.ireader.com.cn/index.php?ca=bookdetail.index&amp;pca=channel.index&amp;bid=11868201"
-            title="悍女三嫁" target="_blank">
+          <RouterLink to="/read">
+          <a title="悍女三嫁">
             悍女三嫁
           </a>
+        </RouterLink>
         </h3>
 
         <p class="author">
@@ -499,13 +502,15 @@ defineProps<{
 
 <style scoped>
 .pubBook {
+  width: 62.5rem;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .conBigTitle {
   width: 62.5rem;
   text-align: center;
-  padding: 1.25rem 0 1.875rem;
+  padding: 2.5rem 0 1.875rem;
 }
 
 .conBigTitle h2 {
