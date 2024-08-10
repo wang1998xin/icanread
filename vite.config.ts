@@ -6,10 +6,12 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import alias from "@rollup/plugin-alias";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
+    alias(),
     vue(),
     vueJsx(),
     AutoImport({
