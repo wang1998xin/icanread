@@ -3,6 +3,7 @@ import MainView from '../views/MainView.vue';
 import MainContent from '../components/MainContent.vue';
 import OtherView from '../views/OtherView.vue';
 import ImageEditorView from '../views/ImageEditorView.vue';
+import loginView from '../views/LoginView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),

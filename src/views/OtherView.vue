@@ -11,8 +11,7 @@ const color2 = useCssVar("--vt-c-indigo");
 color2.value = '##333';
 
 let currentTime = ref('')
-let t: number = 0;
-t = setTimeout(time, 1000); //開始运行
+let t = setTimeout(time, 1000); //開始运行
 function time() {
     clearTimeout(t); //清除定时器
     let dt = new Date();

@@ -5,17 +5,17 @@
             <div class="title" id="recommend_book_current_book">
                 <h2>
                     <a>
-                        <i>{{ title }}</i>
+                        {{ title }}
                     </a>
                 </h2>
                 <p>
-                    {{ introduction }}
+                    {{ desc }}
                 </p>
             </div>
             <div class="swiper">
-                <el-carousel height="150px" padding-top="26px">
-                    <el-carousel-item v-for="item in 4" :key="item">
-                        <h3>{{ item }}</h3>
+                <el-carousel height="200px" padding-top="26px">
+                    <el-carousel-item v-for="(img,index) in imgList" :key="index">
+                        <img :src=img class="lazy">
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -25,13 +25,20 @@
 </template>
 
 <script setup lang="ts">
-import { ref, reactive } from "vue"
+import { ref, reactive, onMounted } from "vue";
+import 赵云 from '../assets/images/赵云.jpg'
 
 defineProps<{
     title: string;
-    introduction: string
+    desc: string
 }>()
 
+const imgList = reactive([
+    赵云,
+    赵云,
+    赵云,
+    赵云
+])
 </script>
 
 <style scoped>
@@ -42,10 +49,10 @@ defineProps<{
 
 .recomWrap {
     width: 62.5rem;
-    height: 14.6875rem;
+    height: 17.6875rem;
     margin: 0 auto;
     text-align: center;
-    padding: 1.875rem 0;
+    padding: 1rem 0 1.875rem;
 }
 
 .recomWrap .title a {

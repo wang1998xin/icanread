@@ -1,19 +1,39 @@
 <template>
   <!--轮播图 开始-->
-  <SwiperTitle title="蝴蝶飞不过那片海"
-    introduction="夏朵朵的家庭是一个再婚重组的家庭，她父亲带着她，而继母带着弟弟张志康。继母对夏朵朵冷漠乃至冷酷，而懦弱的父亲在继母的淫威下也对夏朵朵逐渐忽视..." />
+  <SwiperTitle :title=bookTitle :desc=bookdesc />
   <!--轮播图 结束-->
 
   <!--公共阅读图书 结束-->
-  <PubBookTab msg="出版图书" />
+  <PubBookTab :tabTitle=tabTitle :bookList=bookList />
   <!--公共阅读图书 结束-->
 </template>
 
 <script setup lang="ts">
-import PubBookTab from '../components/PubBookTab.vue';
+import { ref, reactive, onMounted } from "vue";
+import axiosInstance from '@/api/axios';
+import { type BookData } from '../types/MainContentType';
 import SwiperTitle from '../components/SwiperTitle.vue';
+import PubBookTab from '../components/PubBookTab.vue';
 
+let tabTitle = ref('二十四史');
 
+let bookList = reactive([]);
+
+let bookTitle = ref('');
+
+let bookdesc = ref('');
+
+onMounted(() => {
+  // 发起一个post请求
+  axiosInstance({
+    method: 'get',
+    url: 'http://localhost:8080/test',
+  }).then((dataList) => {
+    bookList = dataList.data;
+    bookTitle.value = dataList.data[0].title;
+    bookdesc.value = dataList.data[0].desc;
+  });
+})
 
 </script>
 
