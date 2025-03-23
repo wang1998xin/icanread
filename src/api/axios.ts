@@ -7,6 +7,7 @@ import { ElMessage } from 'element-plus'
 const { cookies } = useCookies();
 
 const axiosInstance = axios.create({
+    baseURL: "/api",
     timeout: 1000 * 30,
     withCredentials: true,
     headers: {
@@ -25,6 +26,7 @@ axiosInstance.interceptors.request.use(config => {
     // config.headers['Authorization'] = cookies.get('Authorization') // 请求头带上token
     return config
 }, error => {
+    console.log(error)
     return Promise.reject(error)
 })
 
@@ -101,6 +103,14 @@ axiosInstance.interceptors.response.use(response => {
         case 401:
             //   clearLoginInfo()
             router.push({ name: 'login' })
+            break
+        case 404:
+            ElMessage({
+                message: '找不到服务器，无法访问此网站，请稍后再试',
+                type: 'error',
+                duration: 1500,
+                customClass: 'element-error-message-zindex'
+            })
             break
         case 405:
             ElMessage({

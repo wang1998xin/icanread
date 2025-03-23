@@ -1,82 +1,80 @@
 <template>
   <div class="login">
     <div class="login-box">
-      <div class="top">
-        <div class="logo"><img src="../assets/images/login-logo.png" alt=""></div>
-      </div>
-      <div class="mid">
-        <el-form :model="dataForm" :rules="dataRule" ref="dataForm" @keyup.enter.native="dataFormSubmit()" status-icon>
-          <el-form-item prop="userName">
-            <el-input class="info" v-model="dataForm.userName" placeholder="帐号"></el-input>
-          </el-form-item>
-          <el-form-item prop="password">
-            <el-input class="info" v-model="dataForm.password" type="password" placeholder="密码"></el-input>
-          </el-form-item>
-          <!-- <el-form-item prop="captcha">
-            <el-row :gutter="20">
-              <el-col :span="14">
-                <el-input v-model="dataForm.captcha"
-                          placeholder="验证码">
-                </el-input>
-              </el-col>
-              <el-col :span="10"
-                      class="login-captcha">
-                <img :src="captchaPath"
-                     @click="getCaptcha()"
-                     alt="">
-              </el-col>
-            </el-row>
-          </el-form-item> -->
-          <el-form-item>
-            <div class="item-btn"><input type="button" value="登录" @click="login()">
-            </div>
-            <!-- <div class="item-btn"><input type="button"
-                    value="登录"
-                    @click="dataFormSubmit()">
-            </div> -->
-          </el-form-item>
-        </el-form>
-      </div>
+      <img src="../assets/images/login-logo.png" alt="">
 
-      <div class="bottom">Copyright © 2019 广州市蓝海创新科技有限公司</div>
+    <div class="profile">
+        <span>
+          Or Be Classical
+        </span>
     </div>
-    <!-- <Verify
-      ref="verify"
-      :captcha-type="'blockPuzzle'"
-      :img-size="{width:'400px',height:'200px'}"
-      @success="login"
-    /> -->
+
+    <div class="mid">
+
+      <el-form :model="dataForm" :rules="dataRule" ref="dataData" @keyup.enter.native="login" status-icon>
+
+        <el-form-item prop="username">
+          <el-input class="info" v-model="dataForm.username" placeholder="Email"></el-input>
+        </el-form-item>
+        
+        <el-form-item prop="password">
+          <el-input class="info" v-model="dataForm.password" type="password" placeholder="Password" show-password></el-input>
+        </el-form-item>
+        
+        <el-button :loading="loading" type="primary" @click.native.prevent="login">LETS GO</el-button>
+      
+      </el-form>
+    </div>
+
+  </div>
+
+    <div class="bottom">Copyright © 2025 王哥出品</div>
   </div>
 </template>
 
 <script setup lang=ts>
 import { ref, reactive, onMounted } from 'vue';
+import useUserStore from '@/store/user'
+import { useRoute, useRouter } from 'vue-router';
+
+const router = useRouter();
+const route = useRoute();
 
 let dataForm = reactive({
-  userName: '',
-  password: '',
-  uuid: '',
-  captcha: ''
+  username: 'admin',
+  password: 'admin',
 });
 
 let dataRule = reactive({
-  userName: [
+  username: [
     { required: true, message: '帐号不能为空', trigger: 'blur' }
   ],
   password: [
     { required: true, message: '密码不能为空', trigger: 'blur' }
   ],
-  captcha: [
-    { required: true, message: '验证码不能为空', trigger: 'blur' }
-  ]
+  // captcha: [
+  //   { required: true, message: '验证码不能为空', trigger: 'blur' }
+  // ]
 });
 
-let captchaPath = ref('');
+let loading = ref(false);
 
-    // 提交表单
-   const dataFormSubmit = ()=> {}
+let redirect = ref('');
 
-   const login = ()=> {}
+let otherQuery = reactive({})
+
+const userStore = useUserStore()
+
+const login = () => {
+  userStore.Login({ username: 'wx', password: dataForm.password })
+    .then(() => {
+      router.push({ path: redirect.value || '/', query: otherQuery })
+    })
+    .catch(error => {
+      console.log(error);
+    })
+
+}
 </script>
 
 <style scoped>
@@ -91,59 +89,36 @@ let captchaPath = ref('');
 .login .login-box {
   position: absolute;
   left: 50%;
+  top: 20%;
   transform: translateX(-50%);
-  height: 100%;
-  padding-top: 10%;
 }
 
-.login .login-box .top {
-  margin-bottom: 30px;
+.login .login-box .profile{
   text-align: center;
 }
 
-.login .login-box .top .logo {
-  font-size: 0;
-  max-width: 50%;
-  margin: 0 auto;
-}
-
-.login .login-box .top .company {
-  font-size: 16px;
-  margin-top: 10px;
-}
-
 .login .login-box .mid {
-  font-size: 14px;
-}
-
-.login .login-box .mid .item-btn {
-  margin-top: 20px;
-}
-
-.login .login-box .mid .item-btn input {
-  border: 0;
-  width: 100%;
-  height: 40px;
-  box-shadow: 0;
-  background: #1f87e8;
-  color: #fff;
-  border-radius: 3px;
-}
-
-.info {
-  width: 410px;
-}
-
-.login-captcha {
-  height: 40px;
-}
-
-.login .login-box .bottom {
   position: absolute;
-  bottom: 10%;
+  left: 50%;
+  top: 25%;
+  width: 21rem;
+  transform: translateX(-50%);
+  padding: 50% 7% 12%;
+  z-index: -1;
+  background-color: #fff;
+  border-radius: 3%;
+}
+
+.login .login-box .mid button {
+  width:100%;
+}
+
+.login .bottom {
+  position: absolute;
+  bottom: 5%;
   width: 100%;
-  color: #999;
-  font-size: 12px;
+  color: #fff;
+  font-size: 1.25rem;
   text-align: center;
 }
 </style>

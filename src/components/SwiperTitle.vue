@@ -26,25 +26,19 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
-import 赵云 from '../assets/images/赵云.jpg'
 
 defineProps<{
     title: string;
     desc: string
 }>()
 
-const imgList = reactive([
-    赵云,
-    赵云,
-    赵云,
-    赵云
-])
+const imgList = reactive([])
 </script>
 
 <style scoped>
 .recom {
     min-width: 62.5rem;
-    background: url(../assets/bg.gif) no-repeat center top;
+    /* background: url(../assets/bg.gif) no-repeat center top; */
 }
 
 .recomWrap {
