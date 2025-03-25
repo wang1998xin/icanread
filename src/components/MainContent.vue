@@ -25,14 +25,14 @@ let bookdesc = ref('');
 
 onMounted(() => {
   // 发起一个post请求
-  axiosInstance({
-    method: 'get',
-    url: 'http://localhost:8080/test',
-  }).then((dataList) => {
-    bookList = dataList.data;
-    bookTitle.value = dataList.data[0].title;
-    bookdesc.value = dataList.data[0].desc;
-  });
+  // axiosInstance({
+  //   method: 'get',
+  //   url: 'http://localhost:8080/test',
+  // }).then((dataList) => {
+  //   bookList = dataList.data;
+  //   bookTitle.value = dataList.data[0].title;
+  //   bookdesc.value = dataList.data[0].desc;
+  // });
 })
 
 </script>

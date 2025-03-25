@@ -1,10 +1,10 @@
-import { createRouter, createWebHistory } from 'vue-router';
+import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import MainView from '../views/MainView.vue';
 import MainContent from '../components/MainContent.vue';
 import OtherView from '../views/OtherView.vue';
 import ImageEditorView from '../views/ImageEditorView.vue';
 
-export const constantRoutes = [
+export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/redirect',
     component: MainView,
@@ -14,16 +14,21 @@ export const constantRoutes = [
         component: () => import('../views/Redirect.vue')
       }
     ],
-    meta:{
+    meta: {
       hidden: true
     },
   },
   {
     path: '/login',
     component: () => import('../views/LoginView.vue'),
-    meta:{
+    meta: {
       hidden: true
     },
+  },
+  {
+    path: '/:catchAll(.*)',
+    name: '404',
+    component: () => import('@/views/error-page/404.vue'),
   },
   {
     path: '/',
@@ -46,14 +51,36 @@ export const constantRoutes = [
         component: ImageEditorView
       }
     ]
-  },
+  }
+]
+
+/**
+ * asyncRoutes
+ * the routes that need to be dynamically loaded based on user roles
+ */
+export const asyncRoutes = [
   {
-    path: '/read',
-    name: 'read',
-    // route level code-splitting
-    // this generates a separate chunk (About.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import('../views/ReadView.vue')
+    path: '/permission',
+    // component: MainView,
+    component: () => import('@/views/ReadView.vue'),
+    // redirect: '/permission',
+    // alwaysShow: true, // will always show the root menu
+    name: 'Permission',
+    meta: {
+      title: 'Permission',
+      roles: ['admin'] // you can set roles in root nav
+    },
+    // children: [
+    //   {
+    //     path: '/read',
+    //     name: 'read',
+    //     component: () => import('@/views/ReadView.vue'),
+    //     meta: {
+    //       title: 'Page Permission',
+    //       roles: ['admin'] // or you can only set roles in sub nav
+    //     }
+    //   }
+    // ]
   }
 ]
 

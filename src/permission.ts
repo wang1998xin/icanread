@@ -1,13 +1,14 @@
 import router from './router'
-// import pinia from './store'
+import { ElMessage } from 'element-plus'
 import NProgress from 'nprogress' // progress bar
 import 'nprogress/nprogress.css' // progress bar style
 import { getToken } from '@/utils/auth' // get token from cookie
 import useUserStore from '@/store/user'
+import usePermissionStore from '@/store/permission'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/login', '/auth-redirect'] // no redirect whitelist
+const whiteList = ['/login', '/', '/auth-redirect'] // no redirect whitelist
 
 router.beforeEach(async (to, from, next) => {
     // start progress bar
@@ -15,7 +16,7 @@ router.beforeEach(async (to, from, next) => {
 
     // determine whether the user has logged in
     const hasToken = getToken()
-    console.log('hasToken:' + hasToken)
+    
     if (hasToken) {
         if (to.path === '/login') {
             // if is logged in, redirect to the home page
@@ -24,18 +25,36 @@ router.beforeEach(async (to, from, next) => {
         }
         else {
             const userStore = useUserStore()
+
+            const permissionStore = usePermissionStore()
+
             // determine whether the user has obtained his permission roles through getInfo
             const hasRoles = userStore.getRoles && userStore.getRoles.length > 0
             if (hasRoles) {
                 next()
             } else {
                 try {
+                    // get user info
+                    // note: roles must be a object array! such as: ['admin'] or ,['developer','editor']
+                    const { roles } = await userStore.GetInfo()
+
+                    // generate accessible routes map based on roles
+                    const accessRoutes = await permissionStore.GenerateRoutes(roles)
+
+                    // dynamically add accessible routes
+                    accessRoutes.forEach(route => router.addRoute(route))
+
                     // set the replace: true, so the navigation will not leave a history record
                     next({ ...to, replace: true })
                 } catch (error) {
                     // remove token and go to login page to re-login
-                    // await store.dispatch('user/resetToken')
-                    // Message.error(error || 'Has Error')
+                    await userStore.ResetToken()
+                    ElMessage({
+                        message: 'Has Error',
+                        type: 'error',
+                        duration: 1.5 * 1000,
+                        customClass: 'element-error-message-zindex'
+                    })
                     next(`/login?redirect=${to.path}`)
                     NProgress.done()
                 }

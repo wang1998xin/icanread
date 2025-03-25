@@ -66,14 +66,13 @@ let otherQuery = reactive({})
 const userStore = useUserStore()
 
 const login = () => {
-  userStore.Login({ username: 'wx', password: dataForm.password })
+  userStore.Login({ username: dataForm.username, password: dataForm.password })
     .then(() => {
       router.push({ path: redirect.value || '/', query: otherQuery })
     })
     .catch(error => {
       console.log(error);
     })
-
 }
 </script>
 

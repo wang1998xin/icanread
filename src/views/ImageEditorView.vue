@@ -12,15 +12,15 @@ import axiosInstance from '@/api/axios';
 
 let res = ref('');
 
-onMounted(() => {
-    // 发起一个post请求
-    axiosInstance({
-        method: 'get',
-        url: 'http://localhost:8080/test',
-    }).then(response => {
-        res.value = JSON.stringify(response)
-    });
-})
+// onMounted(() => {
+//     // 发起一个post请求
+//     axiosInstance({
+//         method: 'get',
+//         url: 'http://localhost:8080/test',
+//     }).then(response => {
+//         res.value = JSON.stringify(response)
+//     });
+// })
 
 
 </script>

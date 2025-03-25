@@ -1,43 +1,58 @@
 <template>
-    <div class="common_header">
-      <div class="common_header_wrap">
-        <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="25" />
-        iCanRead
-        <div class="common_headerR">
-          <!-- 顶级路由导航 -->
-          <nav>
-            <RouterLink to="/">主页</RouterLink>
-            <RouterLink to="/imageEditorView">图片编辑页</RouterLink>
-            <RouterLink to="/other">其他页面</RouterLink>
-          </nav>
-          <!-- 搜索框 -->
-          <div class="common_search">
-            <form action="">
-              <!-- 输入框 -->
-              <el-input v-model="input" placeholder="书名/作者名" />
-              <!-- 放大镜图标 -->
-              <el-icon>
-                <Search />
-              </el-icon>
-            </form>
-            <!-- 结果列表 -->
-            <ul class="list" id="search_suggestion_box"> </ul>
-          </div>
-          <!-- 登录 -->
-          <div class="common_login">
-            <el-button>登录</el-button>
-          </div>
+  <div class="common_header">
+    <div class="common_header_wrap">
+      <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="25" />
+      iCanRead
+      <div class="common_headerR">
+        <!-- 顶级路由导航 -->
+        <nav>
+          <RouterLink to="/">主页</RouterLink>
+          <RouterLink to="/imageEditorView">图片编辑页</RouterLink>
+          <RouterLink to="/other">其他页面</RouterLink>
+          <RouterLink to="/permission">阅读页面</RouterLink>
+        </nav>
+        <!-- 搜索框 -->
+        <div class="common_search">
+          <form action="">
+            <!-- 输入框 -->
+            <el-input v-model="input" placeholder="书名/作者名" />
+            <!-- 放大镜图标 -->
+            <el-icon>
+              <Search />
+            </el-icon>
+          </form>
+          <!-- 结果列表 -->
+          <ul class="list" id="search_suggestion_box"> </ul>
+        </div>
+        <!-- 登录 -->
+        <div class="common_login">
+          <el-button @click.native.prevent="logout">退出登录</el-button>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script setup lang="ts">
-import {ref,reactive} from "vue"
+import useUserStore from "@/store/user"
+import { ref, reactive } from "vue"
+import { useRoute, useRouter } from 'vue-router';
+import usePermissionStore from '@/store/permission'
+
+const permissionStore = usePermissionStore()
+const permission_routes = permissionStore.PermissionRoutes()
 
 const input = ref("明朝那些事儿")
 
+const userStore = useUserStore()
 
+const router = useRouter();
+const route = useRoute();
+
+const logout = async () => {
+  await userStore.LogOut()
+  router.push(`/login?redirect=${route.fullPath}`)
+}
 
 </script>
 
@@ -110,7 +125,4 @@ nav a:first-of-type {
 .common_login {
   float: left;
 }
-
-
-
 </style>
