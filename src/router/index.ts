@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import Layout from '@/layout/index.vue';
-import OtherView from '../views/OtherView.vue';
-import ImageEditorView from '../views/ImageEditorView.vue';
+import OtherView from '@/views/OtherView.vue';
+import ImageEditorView from '@/views/ImageEditorView.vue';
 
 export const constantRoutes: RouteRecordRaw[] = [
   {
@@ -10,7 +10,7 @@ export const constantRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: '/redirect/:path(.*)',
-        component: () => import('../views/Redirect.vue')
+        component: () => import('@/views/Redirect.vue')
       }
     ],
     meta: {
@@ -19,7 +19,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
   {
     path: '/login',
-    component: () => import('../views/LoginView.vue'),
+    component: () => import('@/views/LoginView.vue'),
     meta: {
       hidden: true
     },

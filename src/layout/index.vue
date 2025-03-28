@@ -13,18 +13,18 @@
 </template>
 
 <script setup lang="ts">
-import CommonFooter from './components/CommonFooter.vue';
-import CommonHeader from './components/CommonHeader.vue';
-import AppMain from './components/AppMain.vue';
+import CommonFooter from '@/layout/components/CommonFooter.vue';
+import CommonHeader from '@/layout/components/CommonHeader.vue';
+import AppMain from '@/layout/components/AppMain.vue';
 import { useCssVar } from '@vueuse/core'
 
-const color1 = useCssVar("--vt-c-white");
-// 修改body背景色
-color1.value = '#f0f0f0'
+// const color1 = useCssVar("--vt-c-white");
+// // 修改body背景色
+// color1.value = '#f0f0f0'
 
-const color2 = useCssVar("--vt-c-indigo");
-// 修改段落文字颜色
-color2.value = '#9e9e9e';
+// const color2 = useCssVar("--vt-c-indigo");
+// // 修改段落文字颜色
+// color2.value = '#9e9e9e';
 </script>
 
 <style scoped>
