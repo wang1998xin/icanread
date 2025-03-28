@@ -1,13 +1,12 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
-import MainView from '../views/MainView.vue';
-import MainContent from '../components/MainContent.vue';
+import Layout from '@/layout/index.vue';
 import OtherView from '../views/OtherView.vue';
 import ImageEditorView from '../views/ImageEditorView.vue';
 
 export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/redirect',
-    component: MainView,
+    component: Layout,
     children: [
       {
         path: '/redirect/:path(.*)',
@@ -33,12 +32,12 @@ export const constantRoutes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    component: MainView,
+    component: Layout,
     children: [
       {
         path: '',
         name: 'mainContent',
-        component: MainContent
+        component: OtherView
       },
       {
         path: '/other',

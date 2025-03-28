@@ -8,7 +8,7 @@
   --vt-c-black-soft: #222222;
   --vt-c-black-mute: #282828;
 
-  --vt-c-indigo: #9e9e9e;
+  --vt-c-indigo: #222226;
 
   --vt-c-divider-light-1: rgba(60, 60, 60, 0.29);
   --vt-c-divider-light-2: rgba(60, 60, 60, 0.12);
@@ -91,7 +91,7 @@ a {
   text-decoration: none;
   outline: none;
   font-family: "Microsoft Yahei", arial, sans-serif;
-  color: #9e9e9e;
+  color: #222226;
 }
 
 a:hover {

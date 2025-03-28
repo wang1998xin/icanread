@@ -5,11 +5,11 @@
             <div class="title" id="recommend_book_current_book">
                 <h2>
                     <a>
-                        {{ title }}
+                        <!-- {{ title || '' }} -->
                     </a>
                 </h2>
                 <p>
-                    {{ desc }}
+                    <!-- {{ desc || '' }} -->
                 </p>
             </div>
             <div class="swiper">
@@ -27,10 +27,10 @@
 <script setup lang="ts">
 import { ref, reactive, onMounted } from "vue";
 
-defineProps<{
-    title: string;
-    desc: string
-}>()
+// defineProps<{
+//     title: string;
+//     desc: string
+// }>()
 
 const imgList = reactive([])
 </script>
@@ -38,7 +38,7 @@ const imgList = reactive([])
 <style scoped>
 .recom {
     min-width: 62.5rem;
-    /* background: url(../assets/bg.gif) no-repeat center top; */
+    background: url(../../assets/images/main-bg.jpg) no-repeat center top;
 }
 
 .recomWrap {

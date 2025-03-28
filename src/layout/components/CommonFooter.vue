@@ -30,9 +30,12 @@ import { ref, reactive } from "vue"
 .footer {
   width: 31.25rem;
   height: 9.375rem;
-  margin: 1.875rem auto;
   background-color: #e6e6e6;
   border-radius: .625rem;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, 0);
+  bottom: 0;
 }
 
 .f-title {
