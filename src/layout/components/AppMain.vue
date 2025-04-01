@@ -1,12 +1,10 @@
 <template>
   <!--嵌套子路由 页面内容部分 开始-->
-  <section class="app-main">
-    <transition name="fade-transform" mode="out-in">
-      <keep-alive>
+    <!-- <transition name="fade-transform" mode="out-in">
+      <keep-alive> -->
         <router-view :key="key" />
-      </keep-alive>
-    </transition>
-  </section>
+      <!-- </keep-alive>
+    </transition> -->
   <!--嵌套子路由 页面内容部分 结束-->
 
   <!--公共阅读图书 结束-->

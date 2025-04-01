@@ -8,10 +8,11 @@
       <div class="common_header_right">
         <!-- 顶级路由导航 -->
         <div class="common_header_route">
-          <RouterLink to="/">主页</RouterLink>
-          <RouterLink to="/imageEditorView">图片编辑页</RouterLink>
-          <RouterLink to="/other">其他页面</RouterLink>
-          <RouterLink to="/permission">阅读页面</RouterLink>
+          <RouterLink to="/">图书主页</RouterLink>
+          <RouterLink to="/profile">我的主页</RouterLink>
+          <RouterLink to="/permission">权限页面</RouterLink>
+           <!-- TODO --> 
+          <!-- <head-bar /> -->
         </div>
         <!-- 搜索框 -->
         <div class="common_search">
@@ -38,8 +39,9 @@
 <script setup lang="ts">
 import useUserStore from "@/store/user"
 import { ref, reactive } from "vue"
-import { useRoute, useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router'
 import usePermissionStore from '@/store/permission'
+// import HeadBar from '@/layout/components/HeadBar.vue'
 
 const permissionStore = usePermissionStore()
 const permission_routes = permissionStore.PermissionRoutes()
@@ -60,34 +62,34 @@ const logout = async () => {
 
 <style scoped>
 .common_header {
-  position: relative;        
+  position: relative;
   width: 100%;
   min-width: 62.5rem;
 }
 
-.common_header::before{
-    content: '';
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: url('../../assets/images/commonhead-bg.jpg');
-    opacity: 0.5;
-    z-index: -1;
+.common_header::before {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: url('../../assets/images/commonhead-bg.png');
+  z-index: -1;
 }
 
 .common_header_title {
-  font-size: 14px;
+  font-size: 1.1rem;
   padding: 0 0 0 1rem;
+  color: #fff;
 }
 
 .common_header_log {
   width: 62.5rem;
-  height: 15rem;
+  height: 28.375rem;
   margin: 0 auto;
 }
 
@@ -107,11 +109,11 @@ const logout = async () => {
 
 .common_header_route {
   float: left;
-  font-size: .875rem;
+  font-size: 1.1rem;
 }
 
 .common_header_route a.router-link-exact-active {
-  color: var(--color-text);
+  color: #fff;
 }
 
 .common_header_route a.router-link-exact-active:hover {
@@ -121,6 +123,7 @@ const logout = async () => {
 .common_header_route a {
   display: inline-block;
   padding: 0 1rem;
+  color: #fff;
   /* border-left: .0625rem solid var(--color-border); */
 }
 
@@ -135,7 +138,7 @@ const logout = async () => {
 
 .el-input {
   padding: 0 2rem 0 .75rem;
-  font-size: .75rem;
+  font-size: 1.1rem;
 }
 
 .el-icon {

@@ -1,7 +1,5 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 import Layout from '@/layout/index.vue';
-import OtherView from '@/views/OtherView.vue';
-import ImageEditorView from '@/views/ImageEditorView.vue';
 
 export const constantRoutes: RouteRecordRaw[] = [
   {
@@ -10,7 +8,10 @@ export const constantRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: '/redirect/:path(.*)',
-        component: () => import('@/views/Redirect.vue')
+        component: () => import('@/views/redirect/index.vue'),
+        meta: {
+          hidden: true
+        },
       }
     ],
     meta: {
@@ -19,7 +20,7 @@ export const constantRoutes: RouteRecordRaw[] = [
   },
   {
     path: '/login',
-    component: () => import('@/views/LoginView.vue'),
+    component: () => import('@/views/login/index.vue'),
     meta: {
       hidden: true
     },
@@ -28,6 +29,9 @@ export const constantRoutes: RouteRecordRaw[] = [
     path: '/:catchAll(.*)',
     name: '404',
     component: () => import('@/views/error-page/404.vue'),
+    meta: {
+      hidden: true
+    },
   },
   {
     path: '/',
@@ -36,18 +40,19 @@ export const constantRoutes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        name: 'mainContent',
-        component: OtherView
+        name: 'bookstore',
+        component: () => import('@/views/bookstore/index.vue'),
+        meta: {
+          title: '图书主页'
+        },
       },
       {
-        path: '/other',
-        name: 'other',
-        component: OtherView
-      },
-      {
-        path: '/imageEditorView',
-        name: 'imageEditorView',
-        component: ImageEditorView
+        path: '/profile',
+        name: 'profile',
+        component: () => import('@/views/bookstore/index.vue'),
+        meta: {
+          title: '我的主页'
+        },
       }
     ]
   }
@@ -58,29 +63,28 @@ export const constantRoutes: RouteRecordRaw[] = [
  * the routes that need to be dynamically loaded based on user roles
  */
 export const asyncRoutes = [
-  {
-    path: '/permission',
-    // component: MainView,
-    component: () => import('@/views/ReadView.vue'),
-    // redirect: '/permission',
-    // alwaysShow: true, // will always show the root menu
-    name: 'Permission',
-    meta: {
-      title: 'Permission',
-      roles: ['admin'] // you can set roles in root nav
-    },
-    // children: [
-    //   {
-    //     path: '/read',
-    //     name: 'read',
-    //     component: () => import('@/views/ReadView.vue'),
-    //     meta: {
-    //       title: 'Page Permission',
-    //       roles: ['admin'] // or you can only set roles in sub nav
-    //     }
-    //   }
-    // ]
-  }
+  // {
+  //   path: '/permission',
+  //   component: () => import('@/views/index.vue'),
+  //   // redirect: '/permission',
+  //   // alwaysShow: true, // will always show the root menu
+  //   name: 'Permission',
+  //   meta: {
+  //     title: '权限页面',
+  //     roles: ['admin'] // you can set roles in root nav
+  //   },
+  //   children: [
+  //     {
+  //       path: '/read',
+  //       name: 'read',
+  //       component: () => import('@/views/ReadView.vue'),
+  //       meta: {
+  //         title: 'Page Permission',
+  //         roles: ['admin'] // or you can only set roles in sub nav
+  //       }
+  //     }
+  //   ]
+  // }
 ]
 
 const router = createRouter({

@@ -31,10 +31,11 @@ import { useCssVar } from '@vueuse/core'
 .app_main {
   position: relative;
   left: 50%;
-  width: 98%;
+  width: 97%;
   height: 100%;
   transform: translate(-50%, -3rem);
   background-color: #fff;
+  padding: 20px 0 50px;
   border-radius: 0.5%;
   box-shadow: 1px 1px 10px #888888,-1px 1px 10px #888888
 }
