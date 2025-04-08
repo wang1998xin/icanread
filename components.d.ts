@@ -26,6 +26,7 @@ declare module 'vue' {
     IconTooling: typeof import('./src/components/icons/IconTooling.vue')['default']
     MainContent: typeof import('./src/components/MainContent.vue')['default']
     PubBookTab: typeof import('./src/components/PubBookTab.vue')['default']
+    RecommendCard: typeof import('./src/components/RecommendCard.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
     SwiperTitle: typeof import('./src/components/SwiperTitle.vue')['default']

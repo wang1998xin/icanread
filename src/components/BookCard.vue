@@ -1,71 +1,92 @@
 <template>
-    <div class='bookstore' >
-        <div class="title text">
-            The Best Productivity Apps on Market
-        </div>
+    <div class='bookcard'>
+        <p class="title text">
+            {{ props.bookInfo.title }}
+        </p>
 
-        <div class="author text">
-            Market
-        </div>
+        <p class="author text">
+            {{ props.bookInfo.author }}
+        </p>
 
-        <div class="detail text">
-            Don't be scared of the truth
-            because we need to restart the human foundation in truth
-            And I love you like Kanye loves Kanye I love Rick Owens’ bed design
-            but the back is...
-        </div>
+        <p class="detail text">
+            {{ props.bookInfo.detail }}
+        </p>
 
-        <el-button type="primary" round>READ ARTICLE</el-button>
+        <el-button @click="readClick" type="primary" round>
+            阅读文章
+        </el-button>
     </div>
 </template>
 
 <script setup lang=ts>
+import { useRoute, useRouter } from 'vue-router'
 
 const props = defineProps<{
-    // outCss: {
-    //     width: {
-    //         type: string,
-    //         required: true,
-    //         default:'0px'
-    //     },
-    //     height: {
-    //         type: string,
-    //         required: true,
-    //         default:'0px'
-    //     }
-    // }
+    bookInfo: {
+        title: string,
+        author: string,
+        detail: string,
+    }
 }>()
+
+const router = useRouter();
+
+const readClick = ()=>{
+    router.push({ path: '/read' })
+}
 
 </script>
 
 <style scoped>
-.bookstore {
-    margin: 0% auto;
-    width: 1200px;
-    height: 300px;
+.bookcard {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: pink;
+    gap: 0.5rem;
     border-radius: 10px;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.bookcard::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 10px;
+    background: url('../assets/images/book.png');
+    z-index: -1;
 }
 
 .text {
     text-align: center;
-    width: 50%;
+    width: 90%;
+    color: #fff;
+    font-family: Verdana;
+}
+
+.title {
+    font-size: 20px;
+    font-weight: bolder;
 }
 
 .detail {
-    margin-top: 1%;
+    font-size: 15px;
+    text-indent: 2em;
+    line-height: 30px;
 }
 
 .author {
-    margin-top: 1%;
+    font-size: 17px;
 }
 
-.bookstore>button {
-    margin-top: 2%;
+.bookcard>button {
+    width: 12.5rem;
 }
 </style>

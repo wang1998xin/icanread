@@ -15,6 +15,7 @@ const useUserStore = defineStore('userStore', {
     }
   },
   getters: {
+    getToken: (state) => state.token,
     getRoles: (state) => state.roles,
   },
   actions: {

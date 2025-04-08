@@ -8,7 +8,7 @@ import usePermissionStore from '@/store/permission'
 
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
-const whiteList = ['/login', '/', '/auth-redirect'] // no redirect whitelist
+const whiteList = ['/login', '/', '/auth-redirect','/read'] // no redirect whitelist
 
 router.beforeEach(async (to, from, next) => {
     // start progress bar

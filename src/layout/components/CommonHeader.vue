@@ -11,23 +11,16 @@
           <RouterLink to="/">图书主页</RouterLink>
           <RouterLink to="/profile">我的主页</RouterLink>
           <RouterLink to="/permission">权限页面</RouterLink>
-           <!-- TODO --> 
+          <!-- TODO -->
           <!-- <head-bar /> -->
         </div>
-        <!-- 搜索框 -->
-        <div class="common_search">
-          <!-- 输入框 -->
-          <el-input v-model="input" placeholder="书名/作者名" />
-          <!-- 放大镜图标 -->
-          <el-icon>
-            <Search />
-          </el-icon>
-          <!-- 结果列表 -->
-          <ul class="list" id="search_suggestion_box"> </ul>
-        </div>
+
         <!-- 登录 -->
         <div class="common_login">
-          <el-button @click.native.prevent="logout">
+          <el-button v-if="!userStore.getToken" @click="login">
+            登录
+          </el-button>
+          <el-button v-else="userStore.getToken" @click.native.prevent="logout">
             退出登录
           </el-button>
         </div>
@@ -38,7 +31,6 @@
 
 <script setup lang="ts">
 import useUserStore from "@/store/user"
-import { ref, reactive } from "vue"
 import { useRoute, useRouter } from 'vue-router'
 import usePermissionStore from '@/store/permission'
 // import HeadBar from '@/layout/components/HeadBar.vue'
@@ -46,12 +38,14 @@ import usePermissionStore from '@/store/permission'
 const permissionStore = usePermissionStore()
 const permission_routes = permissionStore.PermissionRoutes()
 
-const input = ref("明朝那些事儿")
-
 const userStore = useUserStore()
 
 const router = useRouter();
 const route = useRoute();
+
+const login = () => {
+  router.push('/login')
+}
 
 const logout = async () => {
   await userStore.LogOut()
@@ -130,22 +124,6 @@ const logout = async () => {
 /* .common_header_route a:first-of-type {
   border: 0;
 } */
-
-.common_search {
-  float: left;
-  position: relative;
-}
-
-.el-input {
-  padding: 0 2rem 0 .75rem;
-  font-size: 1.1rem;
-}
-
-.el-icon {
-  position: absolute;
-  right: 2.8125rem;
-  top: 0.625rem;
-}
 
 .common_login {
   float: left;

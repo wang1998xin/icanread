@@ -41,7 +41,7 @@ defineProps<{
 
         <span>
           <a href="" target="_blank" title="史记">
-            <img src="../assets/images/史记.jpg" title="史记" alt="史记" class="bookCover lazy">
+            <img src="../assets/images/book.png" title="史记" alt="史记" class="bookCover lazy">
           </a>
           <img src="//pweb.d.ireader.com/static/images/index/shadow.gif" alt="史记" class="shadow">
         </span>

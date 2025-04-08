@@ -7,7 +7,7 @@ color1.value = '#e3d1bd';
 
 const color2 = useCssVar("--vt-c-indigo");
 // 修改段落文字颜色
-color2.value = '##333';
+color2.value = '#333';
 </script>
 
 <template>

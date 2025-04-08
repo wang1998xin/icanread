@@ -1,7 +1,7 @@
 <template>
   <div class="login">
     <div class="login-box">
-      <img src="../assets/images/login-logo.png" alt="">
+      <img src="../../assets/images/login-logo.png" alt="">
 
     <div class="profile">
         <span>
@@ -80,7 +80,7 @@ const login = () => {
 .login {
   width: 100%;
   height: 100%;
-  background: url(../assets/images/login-bg.png) no-repeat;
+  background: url(../../assets/images/login-bg.png) no-repeat;
   background-size: cover;
   position: fixed;
 }

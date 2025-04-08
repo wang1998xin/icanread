@@ -26,6 +26,13 @@ export const constantRoutes: RouteRecordRaw[] = [
     },
   },
   {
+    path: '/read',
+    component: () => import('@/views/readbook/index.vue'),
+    meta: {
+      hidden: true
+    },
+  },
+  {
     path: '/:catchAll(.*)',
     name: '404',
     component: () => import('@/views/error-page/404.vue'),
@@ -41,7 +48,7 @@ export const constantRoutes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'bookstore',
-        component: () => import('@/views/bookstore/index.vue'),
+        component: () => import('@/views/booklist/index.vue'),
         meta: {
           title: '图书主页'
         },
@@ -49,7 +56,7 @@ export const constantRoutes: RouteRecordRaw[] = [
       {
         path: '/profile',
         name: 'profile',
-        component: () => import('@/views/bookstore/index.vue'),
+        component: () => import('@/views/profile/index.vue'),
         meta: {
           title: '我的主页'
         },

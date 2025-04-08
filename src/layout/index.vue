@@ -8,7 +8,7 @@
   </div>
 
   <!--公共底部 开始-->
-  <CommonFooter />
+  <!-- <CommonFooter /> -->
   <!--公共底部 结束-->
 </template>
 
@@ -29,6 +29,9 @@ import { useCssVar } from '@vueuse/core'
 
 <style scoped>
 .app_main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   position: relative;
   left: 50%;
   width: 97%;
